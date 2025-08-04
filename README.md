@@ -8,32 +8,42 @@ A simple, elegant, and highly customizable command-line system information tool 
 | -------------------------------------------------------------- | ---------------------------------------------------------------- |
 |![image-1](https://github.com/shitodcy/simfetch/blob/main/image/simfetch-ascii.png)|![image-2](https://github.com/shitodcy/simfetch/blob/main/image/simfetch-image.png)|
 
-## ✨ Features
-
-  - **Elegant Layout:** Displays system information in a perfectly aligned, boxed table.
-  - **Highly Customizable:** Easily change colors, icons, and labels through a simple config file.
-  - **Flexible Visuals:** Supports both custom images (converted to ANSI art by `chafa`) and classic ASCII text logos.
-  - **Smart Detection:** Automatically detects your Distro, Kernel, DE/WM, CPU, GPU, Shell, and more.
-  - **Auto-Configuration:** Automatically generates a default, easy-to-edit config file on the first run.
-  - **Fallback Logo:** If a custom image path is not found, it intelligently falls back to a built-in ASCII logo for your detected Linux distribution.
-
 ## 📋 Requirements
 
 Before you begin, ensure you have the following dependencies installed:
 
-  - **`bash`** v4.0+
-  - **`chafa`**: For rendering images and ASCII art.
-  - **`pciutils`**: Provides the `lspci` command for GPU detection.
-  - A **Nerd Font**: Required for the icons to display correctly. Popular choices include [FiraCode Nerd Font](https://www.nerdfonts.com/font-downloads), [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads), etc.
+-   **`bash`** v4.0+
+-   **`chafa`**: For rendering images and ASCII art.
+-   **`pciutils`**: Provides the `lspci` command for GPU detection.
+
+> **⚠️ Important: Nerd Font Required**
+>
+> `simfetch` uses icons that are only available in Nerd Fonts. If you do not have a Nerd Font installed and configured in your terminal, the icons will not display correctly and may appear as empty boxes (`▯`) or random symbols.
+>
+> You can download a suitable font from the official **[Nerd Fonts Website](https://www.nerdfonts.com/font-downloads)**.
 
 You can typically install `chafa` and `pciutils` with your package manager:
 
 ```bash
-# For Debian / Ubuntu
 sudo apt update && sudo apt install chafa pciutils
+```
 
-# For Arch Linux
-sudo pacman -S chafa pciutils
+#### For Arch Linux / Manjaro
+
+```bash
+sudo pacman -Syu chafa pciutils
+```
+
+#### For Fedora
+
+```bash
+sudo dnf install chafa pciutils-devel
+```
+
+#### For openSUSE
+
+```bash
+sudo zypper install chafa pciutils
 ```
 
 -----
@@ -113,14 +123,12 @@ IMAGE_PATH="/home/jhon/Pictures/cat.png"
 
 The `simfetch` script will automatically detect that the path points to the image and display it correctly.
 
------
 
-### 3. Save and Exit
+### 3. Running simfetch
 
-Once you've edited the path, save the file and exit `nano` by following these steps:
+```bash
+simfetch
+```
 
-1. Press **`Ctrl + X`** to exit.
-2. Press **`Y`** to confirm that you want to save the changes.
-3. Press **`Enter`** to confirm the filename.
+The script will display your system information using custom image. Enjoy\!
 
-Now, run the `simfetch` command again in your terminal. This command should immediately display your custom image instead of the ASCII logo.
