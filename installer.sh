@@ -2,7 +2,7 @@
 
 # --- INSTALLER CONFIGURATION ---
 # The source script file to be installed
-SOURCE_SCRIPT="simfetch.sh"
+SOURCE_SCRIPT="simfetch"
 # The final command name after installation
 CMD_NAME="simfetch"
 # The installation directory (standard for local user binaries)
