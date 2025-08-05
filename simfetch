@@ -17,8 +17,8 @@ NC='\033[0m'
 # ----------------------------------------
 
 # --- USER CONFIGURATION ---
-DISPLAY_MODE="image" # options: "ascii" or "image"
-IMAGE_PATH="/home/azunya/Pictures/AzuNyan-azusa-nakano.png" # your image path here, e.g.
+DISPLAY_MODE="ascii" # options: "ascii" or "image"
+IMAGE_PATH="" # your image path here, e.g.
 SPACING=5
 # ----------------------------
 
@@ -121,7 +121,7 @@ display_info() {
     trap 'rm -f "$temp_art" "$temp_info"' EXIT
 
     if [[ "$DISPLAY_MODE" == "image" ]] && [ -f "$IMAGE_PATH" ] && command -v chafa >/dev/null; then
-        chafa "$IMAGE_PATH" --size "x13" --format=ansi > "$temp_art"
+    chafa "$IMAGE_PATH" --size "x13" --format=ansi > "$temp_art"
     else
         display_tux_ascii > "$temp_art"
     fi
