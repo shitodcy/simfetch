@@ -104,7 +104,7 @@ Converting ASCII to image is quite easy.
 Open a terminal and run the following command to edit the configuration file using the `nano` text editor:
 
 ```bash
-nano ~/.local/bin/simfetch
+nano ~/.config/simfetch/simfetch.conf
 ```
 
 -----
