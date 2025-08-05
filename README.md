@@ -24,6 +24,8 @@ Before you begin, ensure you have the following dependencies installed:
 
 You can typically install `chafa` and `pciutils` with your package manager:
 
+#### For Debian based
+
 ```bash
 sudo apt update && sudo apt install chafa pciutils
 ```
