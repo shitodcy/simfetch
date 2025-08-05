@@ -1,58 +1,58 @@
 #!/bin/bash
 
-# --- INSTALLER CONFIGURATION ---
-# The source script file to be installed
 SOURCE_SCRIPT="simfetch"
-# The final command name after installation
 CMD_NAME="simfetch"
-# The installation directory (standard for local user binaries)
 INSTALL_DIR="$HOME/.local/bin"
+CONFIG_DIR="$HOME/.config/simfetch"
+CONFIG_FILE="$CONFIG_DIR/simfetch.conf"
 
-# --- HELPER FUNCTIONS FOR LOGGING ---
-info() {
-    echo -e "[\033[0;94mINFO\033[0m] $1"
-}
-success() {
-    echo -e "[\033[0;92mSUCCESS\033[0m] $1"
-}
-error() {
-    echo -e "[\033[0;91mERROR\033[0m] $1" >&2
-}
-warning() {
-    echo -e "[\033[0;93mWARNING\033[0m] $1"
-}
+GREEN='\033[0;32m'
+BLUE='\033[0;94m'
+YELLOW='\033[0;93m'
+RED='\033[0;91m'
+NC='\033[0m'
 
-# --- INSTALLATION PROCESS ---
+TICK="[${GREEN}✔${NC}]"
+CROSS="[${RED}✖${NC}]"
+WARN="[${YELLOW}❗${NC}]"
 
-# 1. Check if the source script file exists in the current directory
-info "Searching for file '$SOURCE_SCRIPT'..."
+echo -e "${BLUE}🚀 Starting full customization setup for simfetch...${NC}"
+
 if [ ! -f "$SOURCE_SCRIPT" ]; then
-    error "File '$SOURCE_SCRIPT' not found."
-    error "Make sure 'installer.sh' and '$SOURCE_SCRIPT' are in the same folder."
+    echo -e " ${CROSS} Source script '${SOURCE_SCRIPT}' not found. Aborting."
     exit 1
 fi
-success "File '$SOURCE_SCRIPT' found."
+echo -e " ${TICK} Found source script '${SOURCE_SCRIPT}'."
 
-# 2. Set executable permission
-info "Setting executable permission on '$SOURCE_SCRIPT'..."
-chmod +x "$SOURCE_SCRIPT"
-
-# 3. Ensure the installation directory exists
-info "Ensuring installation directory '$INSTALL_DIR' exists..."
 mkdir -p "$INSTALL_DIR"
+mkdir -p "$CONFIG_DIR"
+echo -e " ${TICK} Directories ensured."
 
-# 4. Move and rename the script to the installation directory
-info "Installing '$SOURCE_SCRIPT' as '$CMD_NAME' to '$INSTALL_DIR'..."
-mv "$SOURCE_SCRIPT" "$INSTALL_DIR/$CMD_NAME"
+cp "$SOURCE_SCRIPT" "$CONFIG_FILE"
+echo -e " ${TICK} Copied full script to '${CONFIG_FILE}' for editing."
 
-# --- FINAL MESSAGE ---
+cat << EOF > "$INSTALL_DIR/$CMD_NAME"
+#!/bin/bash
+# This is a launcher script.
+# To customize simfetch, edit the file below:
+# ~/.config/simfetch/simfetch.conf
+
+# Execute the main script from the config file
+bash "\$HOME/.config/simfetch/simfetch.conf"
+EOF
+
+chmod +x "$INSTALL_DIR/$CMD_NAME"
+echo -e " ${TICK} Launcher created at '${INSTALL_DIR}/${CMD_NAME}'."
+
+
 echo ""
-success "Installation of '$CMD_NAME' complete!"
+echo -e "${GREEN}✅ Installation Complete!${NC}"
 echo ""
-info "You can now run the script from anywhere by typing:"
-info "  $CMD_NAME"
+echo -e "   The entire simfetch code is now yours to edit at:"
+echo -e "   ${YELLOW}${CONFIG_FILE}${NC}"
 echo ""
-warning "If the command is not found, please close and reopen your terminal,"
-warning "or add the following line to your '~/.bashrc' or '~/.zshrc' file:"
-warning "  export PATH=\"\$HOME/.local/bin:\$PATH\""
+echo -e "   Run the command anytime with:"
+echo -e "   ${BLUE}simfetch${NC}"
+echo ""
+echo -e " ${WARN} If the command is not found, please restart your terminal."
 echo ""
