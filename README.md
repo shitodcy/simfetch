@@ -33,7 +33,7 @@ sudo apt update && sudo apt install chafa pciutils
 #### For Arch Linux / Manjaro
 
 ```bash
-sudo pacman -Syu chafa pciutils
+sudo pacman -S chafa pciutils
 ```
 
 #### For Fedora
