@@ -89,7 +89,7 @@ get_info() {
     else
         packages_info="Unknown"
     fi
-    memory_display=$(free -m | awk 'NR==2{printf "%.1f / %.1f GB (%d%%)", $s3/1024, $2/1024, $3*100/$2}')
+    memory_display=$(free -m | awk '/^Mem:/ {printf "%.1f / %.1f GB (%d%%)\n", $3/1024, $2/1024, $3*100/$2}')
 }
 
 # --- FUNCTION: Display ASCII Tux ---
